@@ -134,14 +134,15 @@ def plot_precision_recall_curve(y_true, y_prob, model_name):
         y_prob
     )
 
-    plt.figure(figsize=(7, 5))
+    plt.figure(figsize=(8, 6))
 
     plt.plot(
-        recall,
-        precision,
-        label=f"PR-AUC = {pr_auc:.4f}",
-        lw=2,
-    )
+    recall,
+    precision,
+    color="blue",
+    label=f"PR-AUC = {pr_auc:.4f}",
+    lw=2,
+)
 
     plt.xlabel("Recall")
     plt.ylabel("Precision")
@@ -150,9 +151,7 @@ def plot_precision_recall_curve(y_true, y_prob, model_name):
     )
 
     plt.legend()
-    plt.grid(
-        alpha=0.3
-    )
+    plt.grid(True)
 
     plt.tight_layout()
     plt.show()
