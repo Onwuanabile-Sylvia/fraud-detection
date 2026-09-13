@@ -7,6 +7,8 @@ from sklearn.metrics import make_scorer, average_precision_score
 
 from catboost import CatBoostClassifier
 
+from sklearn.base import clone
+
 
 
 
@@ -128,3 +130,16 @@ def train_catboost(X_train, y_train):
     model.fit(X_train, y_train)
 
     return model
+
+def clone_model(model):
+    """
+    Create a fresh copy of a scikit-learn compatible model.
+
+    Parameters:
+        model: Trained or configured scikit-learn compatible model.
+
+    Returns:
+        A cloned model with the same parameters.
+    """
+
+    return clone(model)

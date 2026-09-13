@@ -10,6 +10,11 @@ models/
 *.joblib
 *.h5
 
+# Keep deployment artifacts required by the FastAPI backend
+!backend/fraud_model.pkl
+!backend/scaler.pkl
+!backend/fraud_threshold.pkl
+
 # Ignore Python environment and cache files
 __pycache__/
 *.pyc
@@ -19,6 +24,10 @@ venv/
 
 # Ignore Jupyter checkpoint files
 .ipynb_checkpoints/
+
+# Ignore Jupyter/CatBoost generated files
+.ipynb_checkpoints/
+notebooks/catboost_info/
 
 # Ignore OS specific files
 .DS_Store

@@ -1,3 +1,6 @@
+from turtle import pd
+
+import pandas as pd
 import matplotlib.pyplot as plt
 
 from sklearn.metrics import (
@@ -157,6 +160,28 @@ def plot_precision_recall_curve(y_true, y_prob, model_name):
     plt.show()
 
 
+def get_precision_recall_thresholds(y_true, y_prob):
+    """
+    Calculate precision, recall, and classification thresholds.
+
+    Parameters:
+        y_true: Actual target values.
+        y_prob: Predicted probabilities for the positive class (fraud).
+
+    Returns:
+        precision: Precision values.
+        recall: Recall values.
+        thresholds: Classification thresholds.
+    """
+
+    precision, recall, thresholds = precision_recall_curve(
+        y_true,
+        y_prob
+    )
+
+    return precision, recall, thresholds
+
+
 def evaluate_model(model, X_test, y_test, model_name):
     """
     Evaluate a trained classification model.
@@ -191,5 +216,54 @@ def evaluate_model(model, X_test, y_test, model_name):
     )
 
     return metrics, y_pred, y_prob
+
+def evaluate_thresholds(
+    y_true,
+    y_prob,
+    candidate_thresholds
+):
+    """
+    Evaluate selected classification thresholds.
+
+    Parameters:
+        y_true: Actual target values.
+        y_prob: Predicted probabilities for the positive class (fraud).
+        candidate_thresholds: List of thresholds to evaluate.
+
+    Returns:
+        DataFrame containing Precision, Recall, and F1 Score
+        for each threshold.
+    """
+
+    threshold_results = []
+
+    for threshold in candidate_thresholds:
+
+        y_pred_threshold = (
+            y_prob >= threshold
+        ).astype(int)
+
+        threshold_results.append({
+            "Threshold": threshold,
+            "Precision": precision_score(
+                y_true,
+                y_pred_threshold,
+                zero_division=0
+            ),
+            "Recall": recall_score(
+                y_true,
+                y_pred_threshold,
+                zero_division=0
+            ),
+            "F1 Score": f1_score(
+                y_true,
+                y_pred_threshold,
+                zero_division=0
+            )
+        })
+
+    return pd.DataFrame(
+        threshold_results
+    )
 
 
