@@ -283,7 +283,7 @@ Random Undersampling and SMOTE were evaluated using XGBoost against the same unt
 | Random Undersampling |    0.0441 | 0.9082 | 0.0842 |  0.9758 | 0.6987 |
 | SMOTE                |    0.3468 | 0.8776 | 0.4971 |  0.9759 | 0.8481 |
 
-SMOTE substantially outperformed random undersampling on precision, F1 score, and PR-AUC in this experiment.
+SMOTE substantially outperformed random undersampling on precision, F1 score, and PR-AUC in this experiment. SMOTE was an experiment. It was NOT the final deployed training strategy.
 
 However, the **final deployed XGBoost model was trained using class weighting through `scale_pos_weight`**, rather than the SMOTE-trained model.
 
@@ -853,9 +853,73 @@ The core prediction therefore remains available even when the optional LLM servi
 
 ---
 
+## 🎥 Project Demonstration
+
+Watch the complete project demonstration showing the FastAPI backend, Streamlit frontend, manual transaction prediction, SHAP-based explanations, and CSV batch prediction.
+
+▶️ **[View Demo Video on Google Drive](https://drive.google.com/file/d/19piJ5DVXIyzvoJSnfHHCVKV-DK1X9aGd/view?usp=sharing)**
+
+---
+
+## 📄 Technical Documentation
+
+Detailed system architecture, machine learning workflow, model development, evaluation, SHAP explainability, API implementation, frontend integration, testing, and implementation notes are available in the technical documentation.
+
+📄 **[View Technical Documentation](Sylvia_Onwuanabile_Fraud_Detection_System_Technical_Documentation.pdf)**
+
+---
+
+## 📊 Project Presentation
+
+The PowerPoint presentation provides an overview of the problem, dataset, model development, optimization, explainable AI, system architecture, application validation, and final results.
+
+📊 **[View Project Presentation](Real-Time_Credit_Card_Fraud_Detection_System_Presentation.ppsx)**
+
+---
+
+## 🖥️ Local Application
+
+The project includes both a FastAPI backend and a Streamlit frontend.
+
+### FastAPI Backend
+
+The FastAPI backend provides the prediction API, input validation, preprocessing, fraud prediction, SHAP explanations, and human-readable explanations.
+
+When running locally, the API documentation is available at:
+
+```text
+http://127.0.0.1:8007/docs
+```
+
+### Streamlit Frontend
+
+The Streamlit frontend provides the user interface for manual transaction prediction and CSV batch prediction.
+
+When running locally, the application is available at:
+
+```text
+http://localhost:8501
+```
+
+To run the backend:
+
+```bash
+uvicorn backend.main:app --reload --port 8007
+```
+
+To run the frontend:
+
+```bash
+python -m streamlit run frontend/app.py
+```
+
+> **Note:** The backend and frontend URLs above are local development addresses and are only accessible when the application is running on the user's computer.
+---
+
 # Project Structure
 
 ```text
+
 fraud-detection/
 │
 ├── src/
@@ -885,6 +949,8 @@ fraud-detection/
 ├── data/
 │   └── creditcard.csv
 │
+├── Real-Time_Credit_Card_Fraud_Detection_System_Presentation.ppsx
+├── Sylvia_Onwuanabile_Fraud_Detection_System_Technical_Documentation.pdf
 ├── requirements.txt
 ├── README.md
 └── LICENSE
